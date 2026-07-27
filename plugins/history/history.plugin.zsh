@@ -9,7 +9,7 @@
 # ── Tìm kiếm history với fzf ─────────────────────────────────────────────────
 # NOTE: Ctrl+R mặc định của Zsh tìm kiếm đơn giản.
 #       Nếu có fzf, ta override Ctrl+R để dùng giao diện tìm kiếm đẹp hơn.
-if myzsh_has "fzf"; then
+if pigtinylabs_has "fzf"; then
 
     # Ctrl+R → mở fzf để tìm history
     # NOTE: Thay --height 40% bằng --height 80% nếu muốn cửa sổ to hơn

@@ -75,13 +75,13 @@ zsh_autosuggest_stop 2>/dev/null   # tắt nếu đang chạy
 # [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
 # rbenv (Ruby)
-# myzsh_has "rbenv" && eval "$(rbenv init - zsh)"
+# pigtinylabs_has "rbenv" && eval "$(rbenv init - zsh)"
 
 # pyenv (Python)
-# myzsh_has "pyenv" && eval "$(pyenv init - zsh)"
+# pigtinylabs_has "pyenv" && eval "$(pyenv init - zsh)"
 
 # jenv (Java)
-# myzsh_has "jenv" && eval "$(jenv init -)"
+# pigtinylabs_has "jenv" && eval "$(jenv init -)"
 
 # Volta (Node, npm, yarn)
 # export VOLTA_HOME="$HOME/.volta"
@@ -91,10 +91,10 @@ zsh_autosuggest_stop 2>/dev/null   # tắt nếu đang chạy
 # ── Tuỳ chỉnh theme ────────────────────────────────────────────────────────────
 # NOTE: Override các biến theme từ đây (không cần sửa file theme gốc)
 #
-# MYZSH_PROMPT_SYMBOL="→"          # Đổi ký hiệu prompt
-# MYZSH_COLOR_PATH="magenta"       # Đổi màu đường dẫn
-# MYZSH_SHOW_TIME=false            # Tắt giờ bên phải
-# MYZSH_CMD_TIME_THRESHOLD=10      # Chỉ báo khi lệnh chạy > 10 giây
+# PIGTINYLABS_PROMPT_SYMBOL="→"          # Đổi ký hiệu prompt
+# PIGTINYLABS_COLOR_PATH="magenta"       # Đổi màu đường dẫn
+# PIGTINYLABS_SHOW_TIME=false            # Tắt giờ bên phải
+# PIGTINYLABS_CMD_TIME_THRESHOLD=10      # Chỉ báo khi lệnh chạy > 10 giây
 
 
 # ── SSH Agent ──────────────────────────────────────────────────────────────────

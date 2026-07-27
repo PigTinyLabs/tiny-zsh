@@ -2,12 +2,12 @@
 # PLUGINS/DOCKER/DOCKER.PLUGIN.ZSH — Docker aliases
 # =============================================================================
 # Alias cho lệnh docker (không phải docker compose).
-# NOTE: Thêm "docker" vào MYZSH_PLUGINS trong myzsh.zsh để bật.
+# NOTE: Thêm "docker" vào PIGTINYLABS_PLUGINS trong pigtinylabs.zsh để bật.
 #
 # Xem toàn bộ alias: alias | grep "^dk"
 # =============================================================================
 
-myzsh_has "docker" || { myzsh_warn "Plugin docker: lệnh 'docker' không tìm thấy"; return; }
+pigtinylabs_has "docker" || { pigtinylabs_warn "Plugin docker: lệnh 'docker' không tìm thấy"; return; }
 
 # ── Image ─────────────────────────────────────────────────────────────────────
 alias dki='docker image'

@@ -1,4 +1,4 @@
-# MyZsh — Lightweight Zsh Framework
+# PigTinyLabs — Lightweight Zsh Framework
 
 Framework Zsh nhỏ gọn, dễ hiểu, dễ custom — viết bằng tiếng Việt cho người Việt.
 
@@ -7,8 +7,8 @@ Framework Zsh nhỏ gọn, dễ hiểu, dễ custom — viết bằng tiếng Vi
 ## Cài đặt
 
 ```bash
-git clone https://github.com/you/myzsh.git ~/.myzsh-src
-cd ~/.myzsh-src
+git clone https://github.com/you/pigtinylabs.git ~/.pigtinylabs-src
+cd ~/.pigtinylabs-src
 sh install.sh
 ```
 
@@ -23,8 +23,8 @@ source ~/.zshrc
 ## Cấu trúc thư mục
 
 ```
-~/.myzsh/
-├── myzsh.zsh              ← Điểm vào chính (source từ .zshrc)
+~/.pigtinylabs/
+├── pigtinylabs.zsh              ← Điểm vào chính (source từ .zshrc)
 ├── custom.zsh             ← File CỦA BẠN — thêm alias/function cá nhân ở đây
 │
 ├── lib/
@@ -48,10 +48,10 @@ source ~/.zshrc
 
 ### 1. Đổi theme
 
-Mở `~/.myzsh/myzsh.zsh`, tìm dòng:
+Mở `~/.pigtinylabs/pigtinylabs.zsh`, tìm dòng:
 
 ```zsh
-export MYZSH_THEME="minimal"
+export PIGTINYLABS_THEME="minimal"
 ```
 
 Đổi thành tên theme khác. Theme có sẵn: `minimal`, `powerline`.
@@ -59,17 +59,17 @@ export MYZSH_THEME="minimal"
 Để **tạo theme mới**:
 
 ```bash
-cp ~/.myzsh/themes/minimal.zsh-theme ~/.myzsh/themes/mytheme.zsh-theme
+cp ~/.pigtinylabs/themes/minimal.zsh-theme ~/.pigtinylabs/themes/mytheme.zsh-theme
 # Sửa file mytheme.zsh-theme theo ý thích
-# Đổi MYZSH_THEME="mytheme" trong myzsh.zsh
+# Đổi PIGTINYLABS_THEME="mytheme" trong pigtinylabs.zsh
 ```
 
 ### 2. Thêm / bỏ plugin
 
-Trong `~/.myzsh/myzsh.zsh`:
+Trong `~/.pigtinylabs/pigtinylabs.zsh`:
 
 ```zsh
-export MYZSH_PLUGINS=(
+export PIGTINYLABS_PLUGINS=(
     git          # Bật
     aliases      # Bật
     history      # Bật
@@ -80,9 +80,9 @@ export MYZSH_PLUGINS=(
 Để **tạo plugin mới**:
 
 ```bash
-mkdir -p ~/.myzsh/plugins/myplugin
-vi ~/.myzsh/plugins/myplugin/myplugin.plugin.zsh
-# Thêm "myplugin" vào MYZSH_PLUGINS trong myzsh.zsh
+mkdir -p ~/.pigtinylabs/plugins/myplugin
+vi ~/.pigtinylabs/plugins/myplugin/myplugin.plugin.zsh
+# Thêm "myplugin" vào PIGTINYLABS_PLUGINS trong pigtinylabs.zsh
 ```
 
 ### 3. Thêm alias / function cá nhân
@@ -106,9 +106,9 @@ reload
 Thêm vào `custom.zsh`:
 
 ```zsh
-MYZSH_PROMPT_SYMBOL="→"
-MYZSH_COLOR_PATH="magenta"
-MYZSH_SHOW_TIME=false
+PIGTINYLABS_PROMPT_SYMBOL="→"
+PIGTINYLABS_COLOR_PATH="magenta"
+PIGTINYLABS_SHOW_TIME=false
 ```
 
 ---
@@ -150,8 +150,8 @@ MYZSH_SHOW_TIME=false
 # plugins/myplugin/myplugin.plugin.zsh
 
 # Kiểm tra dependency
-myzsh_has "sometool" || {
-    myzsh_warn "Plugin myplugin: cần cài sometool"
+pigtinylabs_has "sometool" || {
+    pigtinylabs_warn "Plugin myplugin: cần cài sometool"
     return
 }
 
@@ -176,15 +176,15 @@ MY_SYMBOL="❯"
 MY_COLOR="cyan"
 
 # Hàm build prompt (chạy mỗi khi hiện prompt)
-_myzsh_precmd_prompt() {
+_pigtinylabs_precmd_prompt() {
     local path_part="%F{$MY_COLOR}%~%f"
-    local git_part=$(_myzsh_git_prompt)   # Hàm có sẵn trong utils.zsh
+    local git_part=$(_pigtinylabs_git_prompt)   # Hàm có sẵn trong utils.zsh
     PROMPT="${path_part}${git_part}"$'\n'"${MY_SYMBOL} "
     RPROMPT="%F{240}%D{%H:%M}%f"
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd _myzsh_precmd_prompt
+add-zsh-hook precmd _pigtinylabs_precmd_prompt
 ```
 
 ---

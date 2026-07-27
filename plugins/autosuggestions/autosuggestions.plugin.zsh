@@ -34,9 +34,9 @@ for _as_path in "${_as_paths[@]}"; do
 done
 
 if [[ "$_as_loaded" == false ]]; then
-    myzsh_warn "zsh-autosuggestions chưa được cài."
-    myzsh_warn "macOS:  brew install zsh-autosuggestions"
-    myzsh_warn "Ubuntu: sudo apt install zsh-autosuggestions"
+    pigtinylabs_warn "zsh-autosuggestions chưa được cài."
+    pigtinylabs_warn "macOS:  brew install zsh-autosuggestions"
+    pigtinylabs_warn "Ubuntu: sudo apt install zsh-autosuggestions"
 fi
 unset _as_paths _as_path _as_loaded
 

@@ -33,7 +33,7 @@ fi
 
 # NOTE: Nếu đã cài eza (ls hiện đại hơn): brew install eza
 # Bỏ comment các dòng dưới để thay ls bằng eza:
-# if myzsh_has "eza"; then
+# if pigtinylabs_has "eza"; then
 #     alias ls='eza --icons'
 #     alias ll='eza -lh --icons --git'
 #     alias la='eza -lah --icons --git'
@@ -55,7 +55,7 @@ alias mv='mv -i'          # Hỏi trước khi ghi đè
 
 # ── Xem nội dung file ─────────────────────────────────────────────────────────
 # NOTE: Cài bat để thay thế cat: brew install bat
-if myzsh_has "bat"; then
+if pigtinylabs_has "bat"; then
     alias cat='bat'              # bat: cat có màu syntax highlighting
     alias catp='bat -p'          # bat không có header/line numbers
 else
@@ -64,12 +64,12 @@ fi
 
 # ── Tìm kiếm ──────────────────────────────────────────────────────────────────
 # NOTE: Cài fd để thay thế find: brew install fd
-if myzsh_has "fd"; then
+if pigtinylabs_has "fd"; then
     alias find='fd'
 fi
 
 # NOTE: Cài ripgrep để thay thế grep: brew install ripgrep
-if myzsh_has "rg"; then
+if pigtinylabs_has "rg"; then
     alias search='rg'            # rg: tìm kiếm trong file nhanh hơn grep
 fi
 
@@ -87,10 +87,10 @@ alias free='free -m'         # RAM (Linux only)
 alias top='top -o cpu'       # Sắp xếp theo CPU (macOS)
 
 # ── Reload cấu hình ───────────────────────────────────────────────────────────
-# NOTE: Dùng sau khi sửa custom.zsh hoặc myzsh.zsh
+# NOTE: Dùng sau khi sửa custom.zsh hoặc pigtinylabs.zsh
 alias reload='source ~/.zshrc && echo "✓ Đã reload .zshrc"'
 alias zrc='${EDITOR:-nano} ~/.zshrc'        # Mở .zshrc để sửa
-alias myzrc='${EDITOR:-nano} ~/.myzsh/custom.zsh'  # Mở file custom
+alias myzrc='${EDITOR:-nano} ~/.pigtinylabs/custom.zsh'  # Mở file custom
 
 # ── Tiện ích ──────────────────────────────────────────────────────────────────
 alias h='history | tail -50'    # 50 lệnh gần nhất

@@ -4,7 +4,7 @@
 # Alias chuẩn 1:1 với Oh My Zsh docker-compose plugin.
 # Hỗ trợ cả "docker-compose" (v1) và "docker compose" (v2).
 #
-# NOTE: Thêm "docker-compose" vào MYZSH_PLUGINS trong myzsh.zsh để bật.
+# NOTE: Thêm "docker-compose" vào PIGTINYLABS_PLUGINS trong pigtinylabs.zsh để bật.
 #
 # Xem toàn bộ alias: alias | grep "^dc"
 # =============================================================================
@@ -18,12 +18,12 @@
 # dccmd="docker-compose"   # Ép dùng v1
 # dccmd="docker compose"   # Ép dùng v2
 
-if myzsh_has "docker" && docker compose version >/dev/null 2>&1; then
+if pigtinylabs_has "docker" && docker compose version >/dev/null 2>&1; then
     dccmd="docker compose"     # Docker Compose v2 (tích hợp vào docker CLI)
-elif myzsh_has "docker-compose"; then
+elif pigtinylabs_has "docker-compose"; then
     dccmd="docker-compose"     # Docker Compose v1 (lệnh riêng)
 else
-    myzsh_warn "Plugin docker-compose: không tìm thấy 'docker compose' hoặc 'docker-compose'"
+    pigtinylabs_warn "Plugin docker-compose: không tìm thấy 'docker compose' hoặc 'docker-compose'"
     return
 fi
 

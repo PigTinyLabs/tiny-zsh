@@ -32,32 +32,32 @@ C_BOLD_WHITE="%{$fg_bold[white]%}"
 
 # ── Hàm kiểm tra lệnh tồn tại ────────────────────────────────────────────────
 # NOTE: Dùng hàm này trong plugin để kiểm tra dependency.
-#       Ví dụ: myzsh_has "git" || return
+#       Ví dụ: pigtinylabs_has "git" || return
 #
-# Cách dùng: myzsh_has <tên-lệnh>
+# Cách dùng: pigtinylabs_has <tên-lệnh>
 # Return:    0 nếu tồn tại, 1 nếu không
-myzsh_has() {
+pigtinylabs_has() {
     command -v "$1" >/dev/null 2>&1
 }
 
 # ── Hàm in thông báo của framework ───────────────────────────────────────────
-# NOTE: Dùng để in log có prefix [myzsh] thống nhất
-myzsh_info()  { echo "[myzsh] $1"; }
-myzsh_warn()  { echo "[myzsh] ⚠ $1"; }
-myzsh_error() { echo "[myzsh] ✗ $1"; }
+# NOTE: Dùng để in log có prefix [pigtinylabs] thống nhất
+pigtinylabs_info()  { echo "[pigtinylabs] $1"; }
+pigtinylabs_warn()  { echo "[pigtinylabs] ⚠ $1"; }
+pigtinylabs_error() { echo "[pigtinylabs] ✗ $1"; }
 
 # ── Kiểm tra đang trong git repo không ───────────────────────────────────────
 # NOTE: Hàm này được dùng bởi theme để hiện/ẩn git info trên prompt.
 #       Return 0 nếu đang trong git repo, 1 nếu không.
-myzsh_is_git_repo() {
+pigtinylabs_is_git_repo() {
     git rev-parse --is-inside-work-tree >/dev/null 2>&1
 }
 
 # ── Lấy tên branch git hiện tại ──────────────────────────────────────────────
 # NOTE: Trả về tên branch, hoặc chuỗi rỗng nếu không phải git repo.
-#       Dùng trong theme: branch=$(myzsh_git_branch)
-myzsh_git_branch() {
-    myzsh_is_git_repo || return
+#       Dùng trong theme: branch=$(pigtinylabs_git_branch)
+pigtinylabs_git_branch() {
+    pigtinylabs_is_git_repo || return
     git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null
 }
 
@@ -67,8 +67,8 @@ myzsh_git_branch() {
 #       "✗" = có file chưa commit
 #
 #       Để đổi ký hiệu, sửa hai dòng echo bên dưới.
-myzsh_git_status() {
-    myzsh_is_git_repo || return
+pigtinylabs_git_status() {
+    pigtinylabs_is_git_repo || return
     if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
         echo "✗"   # NOTE: Đổi ký hiệu "dirty" ở đây
     else
@@ -80,9 +80,9 @@ myzsh_git_status() {
 # NOTE: Dùng trong theme để hiện đường dẫn ngắn gọn.
 #       Ví dụ: ~/projects/myapp/src → ~/p/m/src
 #
-# Cách dùng: myzsh_short_path [độ-sâu]
+# Cách dùng: pigtinylabs_short_path [độ-sâu]
 #   Mặc định độ sâu = 3 (giữ lại 3 cấp thư mục cuối)
-myzsh_short_path() {
+pigtinylabs_short_path() {
     local depth="${1:-3}"
     local path="${PWD/#$HOME/~}"
     
@@ -107,24 +107,24 @@ myzsh_short_path() {
 
 # ── Đo thời gian thực thi lệnh ────────────────────────────────────────────────
 # NOTE: Hiển thị thời gian chạy lệnh nếu lâu hơn ngưỡng (mặc định 5 giây).
-#       Thêm vào theme bằng cách gọi _myzsh_preexec và _myzsh_precmd.
-#       Biến MYZSH_CMD_TIME_THRESHOLD: số giây tối thiểu để hiển thị (mặc định 5)
-MYZSH_CMD_TIME_THRESHOLD="${MYZSH_CMD_TIME_THRESHOLD:-5}"
-_myzsh_cmd_start_time=0
+#       Thêm vào theme bằng cách gọi _pigtinylabs_preexec và _pigtinylabs_precmd.
+#       Biến PIGTINYLABS_CMD_TIME_THRESHOLD: số giây tối thiểu để hiển thị (mặc định 5)
+PIGTINYLABS_CMD_TIME_THRESHOLD="${PIGTINYLABS_CMD_TIME_THRESHOLD:-5}"
+_pigtinylabs_cmd_start_time=0
 
-_myzsh_preexec() {
-    _myzsh_cmd_start_time=$SECONDS
+_pigtinylabs_preexec() {
+    _pigtinylabs_cmd_start_time=$SECONDS
 }
 
-_myzsh_precmd_timer() {
-    local elapsed=$(( SECONDS - _myzsh_cmd_start_time ))
-    if (( _myzsh_cmd_start_time > 0 && elapsed >= MYZSH_CMD_TIME_THRESHOLD )); then
-        echo "[myzsh] ⏱ Lệnh chạy ${elapsed}s"
+_pigtinylabs_precmd_timer() {
+    local elapsed=$(( SECONDS - _pigtinylabs_cmd_start_time ))
+    if (( _pigtinylabs_cmd_start_time > 0 && elapsed >= PIGTINYLABS_CMD_TIME_THRESHOLD )); then
+        echo "[pigtinylabs] ⏱ Lệnh chạy ${elapsed}s"
     fi
-    _myzsh_cmd_start_time=0
+    _pigtinylabs_cmd_start_time=0
 }
 
 # Hook vào Zsh
 autoload -Uz add-zsh-hook
-add-zsh-hook preexec _myzsh_preexec
-add-zsh-hook precmd  _myzsh_precmd_timer
+add-zsh-hook preexec _pigtinylabs_preexec
+add-zsh-hook precmd  _pigtinylabs_precmd_timer

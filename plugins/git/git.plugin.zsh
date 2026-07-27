@@ -7,7 +7,7 @@
 # Xem toàn bộ alias đang active: alias | grep "^g"
 # =============================================================================
 
-myzsh_has "git" || { myzsh_warn "Plugin git: lệnh 'git' không tìm thấy"; return; }
+pigtinylabs_has "git" || { pigtinylabs_warn "Plugin git: lệnh 'git' không tìm thấy"; return; }
 
 # ── Hàm nội bộ: lấy branch hiện tại ─────────────────────────────────────────
 # NOTE: Hàm này được dùng bởi ggp, ggl, ggu bên dưới.

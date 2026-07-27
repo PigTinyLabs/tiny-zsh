@@ -9,7 +9,7 @@
 #   brew install --cask font-meslo-lg-nerd-font   (macOS)
 #   Sau đó đổi font terminal sang "MesloLGS NF"
 #
-# NOTE: Để dùng theme này: đổi MYZSH_THEME="powerline" trong myzsh.zsh
+# NOTE: Để dùng theme này: đổi PIGTINYLABS_THEME="powerline" trong pigtinylabs.zsh
 # =============================================================================
 
 # ── Ký hiệu Powerline (cần Nerd Font) ────────────────────────────────────────
@@ -48,7 +48,7 @@ _pl_arrow() {
 }
 
 # ── Build toàn bộ prompt ──────────────────────────────────────────────────────
-_myzsh_precmd_prompt() {
+_pigtinylabs_precmd_prompt() {
     local path_segment git_segment
 
     # Segment 1: Đường dẫn
@@ -57,10 +57,10 @@ _myzsh_precmd_prompt() {
 
     # Segment 2: Git (nếu có)
     git_segment=""
-    if myzsh_is_git_repo; then
+    if pigtinylabs_is_git_repo; then
         local branch status_sym
-        branch=$(myzsh_git_branch)
-        status_sym=$(myzsh_git_status)
+        branch=$(pigtinylabs_git_branch)
+        status_sym=$(pigtinylabs_git_status)
 
         if [[ -n "$status_sym" ]]; then
             git_segment+="$(_pl_fg $PL_BG_PATH)$(_pl_bg $PL_BG_DIRTY)${PL_SEP}"
@@ -88,4 +88,4 @@ _myzsh_precmd_prompt() {
 }
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd _myzsh_precmd_prompt
+add-zsh-hook precmd _pigtinylabs_precmd_prompt
