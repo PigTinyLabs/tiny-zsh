@@ -79,9 +79,24 @@ ggp() {
 }
 compdef _git ggp=git-checkout
 
-# gpsup — Push và set upstream cùng lúc (lần đầu push branch mới)
+# ggf — Force push origin (giống Oh My Zsh)
+ggf() {
+    [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+    git push --force origin "${b:=$1}"
+}
+compdef _git ggf=git-checkout
+
+# ggfl — Force push with lease origin (giống Oh My Zsh)
+ggfl() {
+    [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+    git push --force-with-lease origin "${b:=$1}"
+}
+compdef _git ggfl=git-checkout
+
+# gpsup / ggsup — Push và set upstream cùng lúc (lần đầu push branch mới)
 # Dùng: gpsup        → git push --set-upstream origin <branch-hiện-tại>
 alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
 alias gpsupf='git push --set-upstream origin $(git_current_branch) --force-with-lease'
 
 # gpf — Force push an toàn (kiểm tra không ai push trước)
@@ -89,6 +104,7 @@ alias gpf='git push --force-with-lease'
 alias gpf!='git push --force'                  # ⚠ Force push tuyệt đối (nguy hiểm)
 
 alias gp='git push'
+alias ggpush='git push origin $(git_current_branch)'
 alias gpoat='git push origin --all && git push origin --tags'
 
 # ── Pull ──────────────────────────────────────────────────────────────────────
@@ -114,6 +130,12 @@ ggu() {
     git pull --rebase origin "${b:=$1}"
 }
 compdef _git ggu=git-checkout
+
+# ggpur — Pull rebase origin (giống OMZ)
+alias ggpur='ggu'
+
+# ggpull — Pull origin (giống OMZ)
+alias ggpull='git pull origin $(git_current_branch)'
 
 # ggpnp — Pull rồi Push branch hiện tại (sync nhanh)
 # NOTE: Tương đương ggl && ggp

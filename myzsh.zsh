@@ -46,14 +46,19 @@ export MYZSH_PLUGINS=(
 # Hiển thị thời gian load khi khởi động (dùng để debug nếu terminal chậm)
 MYZSH_DEBUG_LOAD_TIME="false"
 
-# Tự động cập nhật framework (chưa implement, placeholder để bạn thêm sau)
-MYZSH_AUTO_UPDATE="false"
+# Tự động cập nhật framework (hỏi người dùng khi có phiên bản mới)
+MYZSH_AUTO_UPDATE="true"
 
 # ── Load các module core ─────────────────────────────────────────────────────
 _myzsh_start_time=$SECONDS
 
 # Load thư viện nội bộ (hàm tiện ích dùng trong framework)
 source "$MYZSH/lib/utils.zsh"
+
+# Kiểm tra cập nhật nếu được bật
+if [[ "$MYZSH_AUTO_UPDATE" == "true" ]]; then
+    source "$MYZSH/lib/update.zsh"
+fi
 
 # Load cấu hình Zsh cơ bản (completion, keybinds, options)
 source "$MYZSH/lib/zsh-config.zsh"
