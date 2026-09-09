@@ -43,20 +43,25 @@ cat << 'EOF'
 EOF
 echo -e "${RESET}"
 
-# ── Sao chép files vào ~/.pigtinylabs ────────────────────────────────────────────
-info "Đang cài đặt vào $PIGTINYLABS_DIR ..."
+# ── Tạo symlink đến repo ─────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+info "Đang liên kết $PIGTINYLABS_DIR → $SCRIPT_DIR ..."
 
-# Tạo backup nếu đã tồn tại
-if [ -d "$PIGTINYLABS_DIR" ]; then
+# Xử lý nếu đã tồn tại
+if [ -L "$PIGTINYLABS_DIR" ]; then
+    # Đã là symlink → xoá để tạo lại
+    rm "$PIGTINYLABS_DIR"
+    info "Đã xoá symlink cũ"
+elif [ -d "$PIGTINYLABS_DIR" ]; then
+    # Là thư mục thật → backup
     BACKUP="$HOME/.pigtinylabs.backup.$(date +%Y%m%d%H%M%S)"
-    warn "Đã tìm thấy ~/.pigtinylabs, backup sang $BACKUP"
+    warn "Đã tìm thấy ~/.pigtinylabs (thư mục), backup sang $BACKUP"
     mv "$PIGTINYLABS_DIR" "$BACKUP"
 fi
 
-# Copy toàn bộ framework vào home
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cp -r "$SCRIPT_DIR" "$PIGTINYLABS_DIR"
-success "Đã copy files vào $PIGTINYLABS_DIR"
+# Tạo symlink từ ~/.pigtinylabs → repo
+ln -s "$SCRIPT_DIR" "$PIGTINYLABS_DIR"
+success "Đã tạo symlink: $PIGTINYLABS_DIR → $SCRIPT_DIR"
 
 # ── Thêm dòng source vào .zshrc ────────────────────────────────────────────
 SOURCE_LINE='source "$HOME/.pigtinylabs/pigtinylabs.zsh"'
