@@ -58,17 +58,19 @@ _pigtinylabs_precmd_prompt() {
     # Segment 2: Git (nếu có)
     git_segment=""
     if pigtinylabs_is_git_repo; then
-        local branch status_sym
+        local branch status_sym git_user
         branch=$(pigtinylabs_git_branch)
         status_sym=$(pigtinylabs_git_status)
+        git_user=$(git config user.name 2>/dev/null)
+        [[ -z "$git_user" ]] && git_user="git"
 
         if [[ -n "$status_sym" ]]; then
             git_segment+="$(_pl_fg $PL_BG_PATH)$(_pl_bg $PL_BG_DIRTY)${PL_SEP}"
-            git_segment+="$(_pl_fg $PL_FG_DIRTY) ${PL_BRANCH} ${branch} ${status_sym} "
+            git_segment+="$(_pl_fg $PL_FG_DIRTY) ${git_user}:${PL_BRANCH} ${branch} ${status_sym} "
             git_segment+="$(_pl_fg $PL_BG_DIRTY)$(_pl_bg 0)${PL_SEP}"
         else
             git_segment+="$(_pl_fg $PL_BG_PATH)$(_pl_bg $PL_BG_GIT)${PL_SEP}"
-            git_segment+="$(_pl_fg $PL_FG_GIT) ${PL_BRANCH} ${branch} "
+            git_segment+="$(_pl_fg $PL_FG_GIT) ${git_user}:${PL_BRANCH} ${branch} "
             git_segment+="$(_pl_fg $PL_BG_GIT)$(_pl_bg 0)${PL_SEP}"
         fi
     else

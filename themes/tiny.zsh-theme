@@ -24,7 +24,11 @@ _pigtinylabs_git_prompt() {
         status_symbol="%B%F{$PIGTINYLABS_COLOR_DIRTY}${status_symbol}%f%b"
     fi
 
-    echo -n " %B%F{$PIGTINYLABS_COLOR_GIT_WRAP}git:(%f%F{$PIGTINYLABS_COLOR_GIT_BRANCH}${branch}%f%F{$PIGTINYLABS_COLOR_GIT_WRAP})%f%b${status_symbol}"
+    local git_user
+    git_user=$(git config user.name 2>/dev/null)
+    [[ -z "$git_user" ]] && git_user="git"
+
+    echo -n " %B%F{$PIGTINYLABS_COLOR_GIT_WRAP}${git_user}:(%f%F{$PIGTINYLABS_COLOR_GIT_BRANCH}${branch}%f%F{$PIGTINYLABS_COLOR_GIT_WRAP})%f%b${status_symbol}"
 }
 
 _pigtinylabs_precmd_prompt() {

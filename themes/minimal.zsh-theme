@@ -59,9 +59,13 @@ _pigtinylabs_git_prompt() {
         color="%F{$PIGTINYLABS_COLOR_GIT}"
     fi
 
+    local git_user
+    git_user=$(git config user.name 2>/dev/null)
+    [[ -z "$git_user" ]] && git_user="git"
+
     # NOTE: Sửa format chuỗi này để thay đổi cách hiển thị git
     #       Ví dụ thêm số commit ahead/behind: xem hàm pigtinylabs_git_ahead_behind trong utils
-    echo -n " ${color}${PIGTINYLABS_GIT_PREFIX}${branch}${status_symbol}%f"
+    echo -n " ${color}${git_user}:${PIGTINYLABS_GIT_PREFIX}${branch}${status_symbol}%f"
 }
 
 # ── Hàm build phần username@hostname ──────────────────────────────────────────
